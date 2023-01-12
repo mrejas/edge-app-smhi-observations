@@ -1,0 +1,15 @@
+ {
+      "category" : "meterological",
+      "description" : "Fetches meterological observations from SHMI API.",
+      "name" : "SMHI Meterological data",
+      "public" : true,
+      "publisher" : {
+         "id" : 1
+      },
+      "short_description" : "SMHI observations",
+      "source_url" : "https://iotopen.se/",
+      "tags" : [
+		  "meterologic", "weather", "smhi"
+      ]
+   }
+

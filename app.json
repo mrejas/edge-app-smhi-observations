@@ -1,0 +1,31 @@
+{
+  "author": "IoT Open",
+  "licence": "MIT",
+  "input": {
+	  "station": {
+		  "name": "SMHI Station ID (Stationsnummer)",
+		  "type": "number",
+		  "required": true,
+		  "description": "The station ID (Stationsnummer) may be found in several places in the SHMI website. E.g. on https://smhi.se/data/meteorologi/ladda-ner-meteorologiska-observationer. Please make sure to choose an active station."
+	  },
+	  "interval": {
+		  "name": "Fetch interval (hours)",
+		  "type": "number",
+		  "required": true,
+		  "description": "How often to pull from the SMHI API. Please observer that no measurement is updated more than once per hour."
+	  }
+  },
+  "guide": [
+    {
+      "id": "stage_1",
+      "title": "SMHI weatherstation and fetch inteval",
+      "description": "Select the function you like to monitor.",
+      "input_fields": [
+		  "station",
+		  "interval"
+      ]
+    }
+  ]
+}
+
+
