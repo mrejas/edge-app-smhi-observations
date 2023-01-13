@@ -79,7 +79,7 @@ function fetchAndPublishData(station,parameter)
 	if func == nil then
 		device = create_device_if_needed(payload)
 		local fn = {
-			type = "weatherstation",
+			type = "SMHI weatherstation data",
 			installation_id = app.installation_id,
 			meta = {
 				name = payload.station.name .. " - " .. payload.parameter.name  .. " (" .. payload.parameter.summary .. ")",

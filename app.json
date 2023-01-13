@@ -12,7 +12,7 @@
 		  "name": "Fetch interval (hours)",
 		  "type": "number",
 		  "required": true,
-		  "description": "How often to pull from the SMHI API. Please observer that no measurement is updated more than once per hour."
+		  "description": "How often to pull from the SMHI API. Please observe that no measurement is updated more than once per hour."
 	  }
   },
   "guide": [
