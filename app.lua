@@ -100,7 +100,8 @@ function fetchAndPublishData(station,parameter)
 		lynx.createFunction(fn)
 	end
 
-	if payload.value ~= nil then
+	if payload.value ~= nil and next(payload.value) ~= nil then
+		print(json:encode(payload.value))
 		local mqtt_payload = json:encode({value = payload.value[1].value, timestamp = payload.value[1].date / 1000, msg = "quality="..payload.value[1].quality})
 		mq:pub("obj/smhi/".. payload.station.key .."/" .. payload.parameter.key, mqtt_payload, false, 0)
 	end
