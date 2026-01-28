@@ -47,7 +47,8 @@ function create_device_if_needed(payload)
 					station_name = payload.station.name,
 					station_owner = payload.station.owner,
 					latitude = tostring(payload.position[1].latitude),
-					longitude = tostring(payload.position[1].longitude)
+					longitude = tostring(payload.position[1].longitude),
+					["metric_monitor.max_silent_time"] = tostring(cfg.interval + 1) .. "h"
     				}
 			}
 			lynx.createDevice(_dev)
