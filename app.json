@@ -9,10 +9,10 @@
 		  "description": "The station ID (Stationsnummer) may be found in several places in the SHMI website. E.g. on https://smhi.se/data/meteorologi/ladda-ner-meteorologiska-observationer. Please make sure to choose an active station."
 	  },
 	  "interval": {
-		  "name": "Fetch interval (hours)",
+		  "name": "Fetch interval (minutes)",
 		  "type": "number",
 		  "required": true,
-		  "description": "How often to pull from the SMHI API. Please observe that no measurement is updated more than once per hour."
+		  "description": "How often to pull from the SMHI API. Please observe that no measurement is updated more than once per hour, but more frequent fetches may be useful to get the latest data as soon as it is available. But please be considerate and do not fetch more often than every 15 minutes."
 	  }
   },
   "guide": [
