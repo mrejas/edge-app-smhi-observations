@@ -66,7 +66,7 @@ function fetchAndPublishData(station, parameter)
 
     local ok, err = xpcall(function()
     	local url = "https://opendata-download-metobs.smhi.se/api/version/1.0/parameter/" ..
-            parameter .. "/station/" .. station .. "/period/latest-hour/data.json"
+            parameter .. "/station/" .. station .. "/period/latest-day/data.json"
     	local req = http_request.new_from_uri(url)
 	    local headers
 
@@ -125,11 +125,14 @@ function fetchAndPublishData(station, parameter)
         end
     
         if payload.value ~= nil and next(payload.value) ~= nil then
-            print(os.date("[%Y-%m-%d %H:%M:%S] ") .. json:encode(payload.value))
+            local last = payload.value[#payload.value]
+
+            print(os.date("[%Y-%m-%d %H:%M:%S] ") .. json:encode(last))
+
             local mqtt_payload = json:encode({
-                value = payload.value[1].value,
-                timestamp = payload.value[1].date / 1000,
-                msg = "quality=" .. payload.value[1].quality
+                value = last.value,
+                timestamp = last.date / 1000,
+                msg = "quality=" .. last.quality
             })
             mq:pub("obj/smhi/" .. payload.station.key .. "/" .. payload.parameter.key, mqtt_payload, false, 0)
         end
@@ -150,7 +153,8 @@ end
 
 -- Polls all SMHI parameters, logs, and rate limits requests
 function sendData()
-    local parameters = { 1, 21, 39, 11, 22, 26, 27, 19, 2, 20, 9, 24, 40, 25, 28, 30, 32, 34, 36, 37, 29, 31, 33, 35, 17, 18, 15, 38, 23, 14, 5, 7, 6, 13, 12, 8, 10, 16, 4, 3 }
+    -- local parameters = { 1, 21, 39, 11, 22, 26, 27, 19, 2, 20, 9, 24, 40, 25, 28, 30, 32, 34, 36, 37, 29, 31, 33, 35, 17, 18, 15, 38, 23, 14, 5, 7, 6, 13, 12, 8, 10, 16, 4, 3 }
+    local parameters = { 1, 3, 4, 6, 7, 8, 9, 10, 12, 13, 14, 15, 16, 21, 28, 29, 30, 31, 32, 33, 34, 35, 36, 39 }
     print(os.date("[%Y-%m-%d %H:%M:%S] ") .. "sendData() called: polling SMHI data.")
     for _, param in ipairs(parameters) do
         local status, err = pcall(function()
