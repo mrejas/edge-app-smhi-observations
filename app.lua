@@ -68,7 +68,9 @@ function fetchAndPublishData(station, parameter)
     	local url = "https://opendata-download-metobs.smhi.se/api/version/1.0/parameter/" ..
             parameter .. "/station/" .. station .. "/period/latest-hour/data.json"
     	local req = http_request.new_from_uri(url)
-	    local headers, stream = req:go()
+	    local headers
+
+	    headers, stream = req:go(30)
     
         if not headers or headers:get(":status") ~= "200" then
 	        if stream then
